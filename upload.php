@@ -84,7 +84,12 @@ and open the template in the editor.
                 $filename = $_FILES["image"]["name"]; 
                 $tempname = $_FILES["image"]["tmp_name"];     
                 $folder = "upload/".$filename; 
-                $sql = "INSERT INTO uploads (image,author) VALUES ('$filename',$author)";
+                $sql = "INSERT INTO uploads (image,author) VALUES ('".$filename."',".$author."')";
+                if(mysqli_query($con, "INSERT INTO uploads(image, author) VALUES('" . $filename . "', '" . $author . "')")) {
+                    echo  "Επιτυχής εγγραφή! </a>";
+                } else {
+                    echo  "Κάτι δεν πήγε καλά. Δοκιμάστε ξανά αργότερα.";
+                }
                 if (move_uploaded_file($tempname, $folder))  { 
                     echo "Επιτυχής υποβολή εικόνας"; 
                 }else{ 
