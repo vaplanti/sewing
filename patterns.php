@@ -1,5 +1,17 @@
 <?php session_start();
+    $con = mysqli_connect("localhost", "root", "1012");
+    if (!$con) {
+        exit('Connect Error (' . mysqli_connect_errno() . ') '. mysqli_connect_error());
+    }
+        //set the default client character set 
+        mysqli_set_charset($con, 'utf-8');
+            
+        mysqli_select_db($con, "userbase");
+        $sql = "SELECT id, author, image FROM uploads";
+        $result = $con->query($sql);
 
+    
+    // put your code here      
 ?>
 <!DOCTYPE html>
 <!--
@@ -70,18 +82,7 @@ and open the template in the editor.
             Για να υποβάλετε καινούριο πατρόν, πατήστε <a href="upload.php">εδώ</a>
             <br/>
             <?php
-                $con = mysqli_connect("localhost", "root", "1012");
-                if (!$con) {
-                    exit('Connect Error (' . mysqli_connect_errno() . ') '. mysqli_connect_error());
-                }
-                //set the default client character set 
-                mysqli_set_charset($con, 'utf-8');
-            
-                mysqli_select_db($con, "userbase");
-                $sql = "SELECT id, author, image FROM uploads";
-                $result = $con->query($sql);
-
-                if ($result->num_rows > 0) {
+            if ($result->num_rows > 0) {
                     // output data of each row
                 
                     while($row = $result->fetch_assoc()){  
@@ -144,9 +145,7 @@ and open the template in the editor.
                 } else {
                 echo "0 αποτελέσματα";
                 }
-                
-                $con->close();// put your code here
-            ?>
+                $con->close();?>
         </div>
     </body>
 </html>
