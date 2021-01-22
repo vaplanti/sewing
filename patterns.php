@@ -94,10 +94,10 @@ and open the template in the editor.
                         $image=$row["image"];
                          $image_show="/upload/$image";
                         echo $id. ". Υποβλήθηκε από: " . $row["author"]. "<br>"; 
-                        echo "<img src=". $image_show."></div>";?>
+                        echo "<img src=". $image_show."/>";?>
                         <br/>
                         Σχόλια <br/>
-                            <?php  
+                        <?php  
                         $sql2 = "SELECT comment, author FROM comments WHERE imageid= '$id'";
                         $result2 = $con->query($sql2);
 
